@@ -11,7 +11,7 @@ import {
   FaChartBar,      // ✅ New icon for Reports
 } from "react-icons/fa";
 import "./SuperAdminSidebar.css";
-import liblogo from "../images/liblogo.png";
+import liblogo from "../images/LibLogo.png";
 
 function SuperAdminSidebar() {
   const [isAccountsOpen, setIsAccountsOpen] = useState(false);

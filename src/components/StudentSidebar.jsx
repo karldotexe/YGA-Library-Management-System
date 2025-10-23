@@ -7,7 +7,7 @@ import {
   FaChevronUp,
   FaExclamationTriangle,
 } from "react-icons/fa";
-import liblogo from "../images/liblogo.png";
+import liblogo from "../images/LibLogo.png";
 
 function StudentSidebar() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
