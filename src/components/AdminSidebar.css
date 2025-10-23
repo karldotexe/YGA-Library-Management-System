@@ -1,0 +1,302 @@
+* {
+  font-family: Poppins;
+  
+}
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: #0A142F;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px; /* Adjust padding slightly */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+  box-sizing: border-box;
+}
+
+.sidebar-logo {
+  width: 110px;
+  /* Use margin auto for centering */
+  margin: 0 auto 10px auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+.sidebar-divider {
+  border: none;
+  height: 1px;
+  background-color: white;
+  margin: 0 0 20px 0;
+  opacity: 0.3;
+  box-sizing: border-box;
+
+
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Slightly reduce gap */
+  flex-grow: 1; /* Allow nav to take up space */
+  box-sizing: border-box;
+  
+}
+
+/* Style for the container acting as a link/toggle */
+.sidebar-link {
+  display: flex; /* Changed back to flex for direct children alignment */
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  cursor: pointer; /* Indicate clickability */
+  box-sizing: border-box;
+ 
+}
+
+/* Wrapper inside link/div for flex alignment */
+.sidebar-link-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Push chevron to the right */
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar-link-content > div { /* Target the div containing icon+text */
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Adjusted gap */
+    
+}
+
+.sidebar-link:hover {
+  background-color: #1e2a50;
+}
+
+/* Style for Active NavLink (applies to both main and sublinks) */
+.sidebar-link.active,
+.sidebar-sublink.active {
+  background-color: #1e2a50;
+  font-weight: 500;
+}
+/* Specific active style for the Books toggle parent when submenu is active */
+/* This is tricky without JS checking location.pathname. Keeping simple active style for now. */
+
+.sidebar-icon {
+  font-size: 18px;
+  /* --- Ensure consistent icon width and alignment --- */
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0; /* Prevent icon shrinking */
+  display: inline-block; /* Helps with alignment */
+  vertical-align: middle; /* Align icon better with text */
+}
+
+.sidebar-chevron {
+    font-size: 12px;
+    opacity: 0.7;
+    transition: transform 0.2s ease; /* Animate rotation */
+}
+
+/* --- Submenu Styles --- */
+.sidebar-submenu {
+  display: flex;
+  flex-direction: column;
+  /* Smooth slide-down animation */
+  max-height: 500px; /* Adjust as needed, should be more than content height */
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Add padding transition */
+  padding-left: 10px; /* Indent the whole submenu block slightly */
+  margin-top: -4px; /* Adjust spacing when open */
+  padding-bottom: 4px; /* Add space below submenu items */
+
+}
+
+/* Style for submenu when closed (using conditional rendering handles this) */
+
+
+.sidebar-sublink {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Match main link gap */
+  text-decoration: none;
+  color: #e0e0e0; /* Slightly lighter color for sublinks */
+  padding: 8px 10px 8px 15px; /* Adjust padding for indentation */
+  border-radius: 6px;
+  font-size: 0.9em; /* Slightly smaller font */
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-sublink:hover {
+  background-color: #2a3b68; /* Different hover for sublinks */
+  color: white;
+}
+
+.sidebar-sublink .sub-icon {
+    font-size: 16px; /* Slightly smaller icon */
+    /* Inherit width, text-align from .sidebar-icon */
+}
+
+
+/* --- Footer Styles --- */
+.sidebar-footer {
+  margin-top: auto; /* Push footer to the bottom */
+  padding-top: 15px; /* Space above footer content */
+  text-align: center;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6); /* Lighter footer text */
+}
+
+.footer-divider {
+    margin-bottom: 15px; /* Space below divider */
+}
+/* --- Mobile Responsive --- */
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    bottom: 0;
+    top: auto;
+    overflow: visible; /* allow dropdowns to pop up */
+    position: fixed;
+  }
+
+  .sidebar-logo,
+  .sidebar-divider,
+  .sidebar-footer {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+
+  .sidebar-link {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    padding: 5px;
+    flex: 1;
+    position: relative; /* 🔑 anchor for submenu */
+    border-radius: 0;
+    height: 100%;
+  }
+
+  .sidebar-link:hover {
+    background-color: transparent;
+  }
+
+  .sidebar-link.active {
+    background-color: #1e2a50;
+  }
+
+  .sidebar-link-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+  }
+
+  .sidebar-link-content > div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .sidebar-link span {
+    display: block;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .sidebar-chevron {
+    display: none;
+  }
+
+  .sidebar-icon {
+    font-size: 22px;
+    width: auto;
+    margin: 0;
+  }
+
+  /* ✅ Submenu directly above the icon */
+  .sidebar-submenu {
+    position: absolute;
+    bottom: calc(100% + 8px); /* ⬆ pops just above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1e2a50;
+    border-radius: 10px;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 150px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    animation: riseUp 0.25s ease-out;
+    z-index: 9999;
+  }
+
+  .sidebar-sublink {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: transparent;
+  }
+
+  .sidebar-sublink:hover {
+    background-color: #2a3b68;
+  }
+
+  .sub-icon {
+    font-size: 18px;
+  }
+
+  /* ✨ Optional: small triangle arrow */
+  .sidebar-submenu::before {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1e2a50 transparent transparent transparent;
+  }
+
+  /* Submenu animation */
+  @keyframes riseUp {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 10px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+}

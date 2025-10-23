@@ -1,0 +1,168 @@
+/* ========== 🔍 TOP BAR STYLES ========== */
+.yga-brwd-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.yga-brwd-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 8px 12px;
+  width: 100%;
+  max-width: auto;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.yga-brwd-search-box input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.yga-brwd-search-icon {
+  color: #333;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+/* These styles were in your file but unused in the component, renamed anyway */
+.yga-brwd-buttons-container {
+  display: flex;
+  gap: 10px;
+}
+
+.yga-brwd-header-btn {
+  background-color: #0b1437;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.yga-brwd-header-btn:hover {
+  background-color: #131943;
+}
+
+/* ========== 💬 MODAL BASE STYLES ========== */
+.yga-brwd-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: ygaBrwdFadeIn 0.2s ease-out; /* Added fade-in */
+}
+
+/* Base style for all modal content boxes */
+.yga-brwd-modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: ygaBrwdPopIn 0.25s ease-in-out;
+}
+
+/* Base text layout for all modals */
+.yga-brwd-modal-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.yga-brwd-modal-content p {
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Color accents based on the new classes */
+.yga-brwd-modal-overdue h3 { color: #f59f00; } /* overdue = orange */
+.yga-brwd-modal-return h3 { color: #005eff; } /* return = blue */
+.yga-brwd-modal-lost h3 { color: #ff6b6b; } /* lost = red */
+
+
+/* Buttons inside modals */
+.yga-brwd-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.yga-brwd-modal-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.yga-brwd-modal-btn.yga-brwd-cancel {
+  background: #ccc;
+  color: #333;
+}
+.yga-brwd-modal-btn.yga-brwd-cancel:hover {
+  background: #b0b0b0;
+}
+
+
+.yga-brwd-modal-btn.yga-brwd-confirm {
+  background: #0a142f;
+  color: #fff;
+}
+.yga-brwd-modal-btn.yga-brwd-confirm:hover {
+  opacity: 0.85;
+}
+
+/* Specific style for the 'Confirm Lost' button */
+.yga-brwd-modal-btn.yga-brwd-confirm-lost {
+  background: #d90429; /* Strong red */
+  color: #fff;
+}
+.yga-brwd-modal-btn.yga-brwd-confirm-lost:hover {
+  background: #b00020; /* Darker red */
+}
+
+.yga-brwd-modal-buttons-lost{
+  display: flex;
+  justify-content: center ;
+  gap: 10px;
+}
+
+
+
+/* Subtle pop animation */
+@keyframes ygaBrwdPopIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Fade in for overlay */
+@keyframes ygaBrwdFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

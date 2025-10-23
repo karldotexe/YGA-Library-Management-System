@@ -1,0 +1,155 @@
+.archives-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: calc(100% - 220px); /* leave space for sidebar */
+  margin-left: 120px;
+  background: #f8f8f5;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+/* 🔍 Search bar container */
+.search-container,
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.search-container input,
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.search-icon {
+  color: #555;
+  font-size: 18px;
+}
+
+/* 📚 Table */
+.archives-table {
+  width: 100%;
+  max-width: 1140px;   /* match your search bar max width */
+  margin: 0 auto;      /* centers the table */
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #bfc3c9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  table-layout: auto;
+}
+
+.archives-table th,
+.archives-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #bfc3c9;
+}
+
+.archives-table th {
+  background: #011a3e;
+  color: white;
+  font-weight: 500;
+}
+
+.archives-table tbody tr:hover {
+  background-color: #f9fafc;
+  transition: 0.2s;
+}
+
+/* Buttons */
+.delete-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #ff4c4c;
+}
+
+.retrieve-btn {
+  background: #a4f5a4;
+  border: none;
+  margin: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.retrieve-btn:hover {
+  background: #90e690;
+}
+
+.no-archives {
+  text-align: center;
+  color: #777;
+  margin-top: 50px;
+  font-size: 18px;
+}
+
+/* --------------------------- */
+/* Responsive for sidebar + devices */
+@media (max-width: 1000px) {
+  .archives-page {
+    width: 100%;       /* full width when sidebar moves to bottom */
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .search-container,
+  .search-box {
+    max-width: 100%;
+  }
+
+  .archives-table th,
+  .archives-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .delete-btn,
+  .retrieve-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .archives-page {
+    padding: 15px;
+  }
+
+  .archives-table th,
+  .archives-table td {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  .delete-btn,
+  .retrieve-btn {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+}

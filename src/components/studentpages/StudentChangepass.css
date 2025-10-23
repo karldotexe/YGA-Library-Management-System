@@ -1,0 +1,182 @@
+/* ==========================
+   Change Password Page
+========================== */
+
+.changepass-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f9f9f9;
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+}
+
+.changepass-card {
+  background-color: #FAF9F6;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+}
+
+.changepass-header {
+  height: 25px;
+  background-color: #0a0f29;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.changepass-content {
+  padding: 30px 25px;
+}
+
+.changepass-content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* ---------------------------
+   Input Groups
+--------------------------- */
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* Password wrapper */
+.changepass-password-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0 10px;
+}
+
+.changepass-password-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 14px;
+  background: transparent;
+}
+
+.changepass-password-wrapper .changepass-eye-icon {
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------------------------
+   Messages
+--------------------------- */
+
+.error-message {
+  color: #ff4c4c;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* ---------------------------
+   Buttons
+--------------------------- */
+
+.changepass-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+
+
+.cancel-btn{
+  width: 130px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+.save-btn {
+  width: 130px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background-color: #e6e6e6;
+  color: #222;
+}
+
+.cancel-btn:hover {
+  background-color: #d9d9d9;
+}
+
+/* Save Button */
+.save-btn {
+  background-color: #b1ffb6;
+  color: #222;
+}
+
+.save-btn:hover {
+  background-color: #9df3a6;
+}
+
+/* ---------------------------
+   Responsive
+--------------------------- */
+
+@media (max-width: 500px) {
+  .changepass-card {
+    width: 90%;
+  }
+
+  .changepass-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+}

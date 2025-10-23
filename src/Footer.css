@@ -1,0 +1,81 @@
+.footer {
+  background-color: #0a142f;
+  color: #fff;
+  height: 245px;
+  padding: 40px 20px 20px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* aligns logo to the top */
+  margin-bottom: 0; /* remove extra spacing */
+}
+
+.footer-logo img {
+  width: 240px;
+  height: auto;
+  display: block;
+  margin-top: -40px; /* pull logo up slightly */
+}
+
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.footer-section h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.footer-section p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.social-icons i {
+  font-size: 18px;
+  margin: 0 5px;
+  cursor: pointer; 
+  transition: color 0.2s;
+}
+
+.social-icons i:hover {
+  color: #00bfff;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 10px;
+}
+
+.social-icons svg {
+  font-size: 18px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.social-icons svg:hover {
+  color: #00bfff;
+}
+

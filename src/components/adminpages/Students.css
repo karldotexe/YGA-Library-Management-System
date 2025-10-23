@@ -1,0 +1,346 @@
+/* ============================
+   Page & Container
+   ============================ */
+.lrn-reg-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.lrn-reg-container {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 40px;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+.lrn-reg-header {
+  background-color: #0b1437;
+  height: 25px;
+  border-radius: 15px 15px 0 0;
+  margin: -30px -30px 20px -30px;
+  width: calc(100% + 60px);
+}
+
+/* ============================
+   Single Student Form
+   ============================ */
+.lrn-reg-form .lrn-reg-form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lrn-reg-form label {
+  width: 120px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.lrn-reg-form input {
+  flex-grow: 1;
+  padding: 10px 12px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  max-width: calc(100% - 132px); /* Label width + gap */
+  /* Basic Input Reset (Optional but can help consistency) */
+  appearance: none;
+  background-color: white; /* Ensure background isn't transparent */
+}
+
+/* Add focus styles for better accessibility */
+.lrn-reg-form input:focus {
+  outline: none;
+  border-color: #0b1437; /* Example focus color */
+  box-shadow: 0 0 0 2px rgba(11, 20, 55, 0.2); /* Example focus shadow */
+}
+
+
+.lrn-reg-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================
+   Buttons
+   ============================ */
+
+/* ✅ ==== BUTTON RESET ==== */
+/* Apply this ONLY to the specific buttons in this component */
+.lrn-reg-register-btn,
+.lrn-reg-bulk-register-btn,
+.lrn-reg-bulk-upload-btn,
+.lrn-reg-registered-list-btn {
+  /* Reset common inherited styles */
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit; /* Use font from body/parent */
+  color: inherit; /* Use color from body/parent */
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0;
+  appearance: none; /* Remove default browser button styles */
+  cursor: pointer;
+  box-shadow: none; /* Remove potential global shadows */
+}
+/* ==== END BUTTON RESET ==== */
+
+
+/* Base styles for main action buttons (centering, width, basic appearance) */
+.lrn-reg-register-btn,
+.lrn-reg-bulk-register-btn {
+  width: 75%;
+  max-width: 350px;
+  /* Re-apply desired common styles after reset */
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background-color 0.3s, opacity 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Specific styles for the SINGLE Register button */
+.lrn-reg-register-btn {
+  background-color: #aefdbb;
+  color: #333;
+  margin-top: 20px;
+  position: relative; /* Needed for transform */
+  /* ✅ Shift left by 10px */
+}
+
+.lrn-reg-register-btn:hover {
+  background-color: #9cf5aa;
+}
+
+/* Specific styles for the BULK Register button */
+.lrn-reg-bulk-register-btn {
+  background-color: #28a745;
+  color: white;
+  margin-top: 0;
+}
+
+.lrn-reg-bulk-register-btn:hover {
+  background-color: #218838;
+}
+
+
+/* Desktop / default Registered List button (Re-apply styles after reset) */
+.lrn-reg-registered-list-btn {
+  position: absolute;
+  top: 80px;
+  right: 80px;
+  background-color: #0b1437;
+  color: white;
+  padding: 10px 20px; /* Re-apply padding */
+  border-radius: 20px; /* Re-apply border-radius */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Re-apply shadow */
+  font-size: 14px; /* Re-apply font-size */
+}
+
+/* Disabled state for action buttons */
+.lrn-reg-register-btn:disabled,
+.lrn-reg-bulk-register-btn:disabled {
+  background-color: #a0aec0; /* Keep specific background */
+  cursor: not-allowed;
+  opacity: 0.7;
+  color: #fff; /* Ensure text is visible on gray background */
+  transform: translateX(0); /* Reset transform shift when disabled */
+}
+/* Re-apply hover styles if you want them on the disabled state (usually not needed) */
+
+
+/* ============================
+   Bulk Upload Section
+   ============================ */
+
+.lrn-reg-bulk-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  align-items: center;
+}
+
+/* Select File Button (Re-apply styles after reset) */
+.lrn-reg-bulk-upload-btn {
+  width: 75%;
+  max-width: 350px;
+  padding: 10px 15px; /* Re-apply */
+  border: 2px dashed #ccc; /* Re-apply */
+  background-color: #fff; /* Re-apply */
+  border-radius: 6px; /* Re-apply */
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: #555; /* Re-apply */
+  transition: 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lrn-reg-bulk-upload-btn:hover {
+  background-color: #f9f9f9;
+  border-color: #aaa;
+}
+
+/* ============================
+   Messages & Results
+   ============================ */
+
+.lrn-reg-message {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid transparent; /* Base border */
+}
+
+/* Success Message Style */
+.lrn-reg-message.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb; /* Use border-color */
+}
+
+/* Error Message Style */
+.lrn-reg-message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb; /* Use border-color */
+}
+
+/* Bulk Results List */
+.lrn-reg-bulk-results {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  width: 100%;
+}
+
+.lrn-reg-bulk-results h4 {
+  margin: 0 0 10px 0;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.lrn-reg-bulk-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.lrn-reg-bulk-results li {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.lrn-reg-bulk-results li:last-child {
+  border-bottom: none;
+}
+
+.lrn-reg-result-success {
+  color: #155724;
+  background-color: #d4edda;
+}
+
+.lrn-reg-result-error {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+
+/* ============================
+   Responsiveness
+   ============================ */
+@media (max-width: 1300px) {
+
+  .lrn-reg-form .lrn-reg-form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lrn-reg-form label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .lrn-reg-form input {
+    width: 100%;
+    max-width: none;
+    margin-right: 0;
+  }
+
+  .lrn-reg-register-btn,
+  .lrn-reg-bulk-upload-btn,
+  .lrn-reg-bulk-register-btn {
+     width: 100%;
+     max-width: none;
+     transform: translateX(0); /* ✅ Reset transform on smaller screens */
+  }
+
+  .lrn-reg-registered-list-btn {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin: 40px auto 0 auto;
+    display: block;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 400px) {
+  .lrn-reg-container {
+    padding: 20px;
+  }
+  .lrn-reg-header {
+    margin: -20px -20px 15px -20px;
+    width: calc(100% + 40px);
+  }
+  .lrn-reg-registered-list-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}

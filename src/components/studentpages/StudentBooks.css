@@ -1,0 +1,199 @@
+/* StudentBooks.css (Unique Prefix yga-sb- for list/modals, Original names for topbar, Centered Layout) */
+
+/* 🎓 Page Layout */
+.yga-sb-page {
+  padding: 25px;
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+  /* Removed transition: margin-left... */
+  transition: padding-bottom 0.3s ease; /* Keep transition for mobile padding */
+  /* NO margin-left here by default */
+}
+
+/* === TOP BAR STYLES (Original Naming + Specific Styles Provided) === */
+.student-books-topbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  max-width: 1100px; /* Limits width for centering */
+  margin-left: auto; /* Centers the top bar */
+  margin-right: auto; /* Centers the top bar */
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Aligns items within the bar */
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.student-search-box {
+  display: flex; align-items: center; background: white; border-radius: 25px; padding: 0 15px; height: 42px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border: 1px solid #e0e0e0; flex-grow: 1; max-width: 400px; min-width: 200px; transition: box-shadow 0.3s ease;
+}
+.student-search-box:focus-within { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); border-color: #ccc; }
+.student-search-box input { border: none; outline: none; font-size: 15px; width: 100%; height: 100%; background: transparent; padding-left: 8px; font-family: "Poppins", sans-serif; }
+.search-icon { color: #888; font-size: 18px; margin-left: 0; }
+.student-dropdown-container { position: relative; display: inline-block; }
+.student-dropdown-btn { background: white; border: 1px solid #e0e0e0; border-radius: 20px; padding: 9px 18px; font-size: 14px; font-weight: 500; color: #333; cursor: pointer; min-width: 130px; text-align: left; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); transition: background-color 0.2s ease, box-shadow 0.2s ease; height: 42px; display: flex; align-items: center; font-family: "Poppins", sans-serif; }
+.student-dropdown-btn:hover { background-color: #f7f7f7; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); }
+.student-dropdown-checkboxes { position: absolute; top: calc(100% + 5px); left: 0; min-width: 180px; max-height: 280px; overflow-y: auto; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border: 1px solid #eee; padding: 8px 0; z-index: 100; scrollbar-width: thin; scrollbar-color: #ccc #f0f0f0; }
+.student-dropdown-checkboxes::-webkit-scrollbar { width: 5px; }
+.student-dropdown-checkboxes::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 10px; }
+.student-dropdown-checkboxes::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+.student-dropdown-checkboxes label, .sort-option { display: flex; align-items: center; padding: 8px 15px; font-size: 14px; cursor: pointer; transition: background-color 0.2s ease; white-space: nowrap; color: #333; border-radius: 0; }
+.student-dropdown-checkboxes label { gap: 10px; }
+.student-dropdown-checkboxes label input { cursor: pointer; accent-color: #0a0e27; }
+.sort-option:hover, .student-dropdown-checkboxes label:hover { background-color: #f5f5f5; }
+/* === END TOP BAR STYLES === */
+
+
+/* === BOOK LIST STYLES (yga-sb- prefix) === */
+.yga-sb-book-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; max-width: 1100px; /* Limits width for centering */ margin: 40px auto 0 auto; /* Centers the list */ padding: 0 10px; box-sizing: border-box;
+}
+.yga-sb-book-card { background-color: #ffffff; border: 1px solid #e8e8e8; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); overflow: hidden; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; display: flex; flex-direction: column; position: relative; }
+.yga-sb-book-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
+.yga-sb-book-cover { width: 100%; height: 270px; object-fit: cover; display: block; background-color: #f0f0f0; }
+.yga-sb-book-title-on-card { font-weight: 600; font-size: 15px; padding: 12px 10px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: auto; background-color: #fff; }
+/* === END BOOK LIST STYLES === */
+
+/* Empty State (yga-sb- prefix) */
+.yga-sb-no-books { text-align: center; font-size: 16px; color: #777; margin-top: 50px; grid-column: 1 / -1; }
+
+
+/* === MODAL STYLES (yga-sb- prefix) === */
+.yga-sb-modal-overlay { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.45); display: flex; align-items: center; justify-content: center; z-index: 2000; animation: yga-sb-fadeIn 0.25s ease; padding: 20px; box-sizing: border-box; }
+.yga-sb-modal-content { background-color: #fff; border-radius: 16px; padding: 30px 35px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); animation: yga-sb-popIn 0.3s ease; position: relative; max-height: 90vh; overflow-y: auto; font-family: "Poppins", sans-serif; }
+.yga-sb-modal-close-button { position: absolute; top: 15px; right: 15px; background: #eee; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 1.2rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; z-index: 10; }
+.yga-sb-modal-close-button:hover { background: #ddd; }
+.yga-sb-modal-content h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 12px; color: #0a142f; }
+.yga-sb-modal-content p { font-size: 0.95rem; color: #444; margin-bottom: 18px; line-height: 1.5; }
+.yga-sb-modal-content label { display: block; font-size: 0.9rem; color: #555; margin-bottom: 5px; text-align: left; padding-left: calc(7.5% + 12px); }
+.yga-sb-modal-content input[type="number"] { display: block; margin: 0 auto 18px auto; width: 85%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 10px; font-size: 15px; transition: 0.3s ease; font-family: "Poppins", sans-serif; box-sizing: border-box; }
+.yga-sb-modal-content input[type="number"]:focus { border-color: #0a142f; box-shadow: 0 0 0 3px rgba(10, 20, 47, 0.15); outline: none; }
+.yga-sb-modal-buttons { display: flex; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.yga-sb-modal-buttons button { flex: 1; padding: 10px 0; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; font-family: "Poppins", sans-serif; transition: 0.25s; font-size: 0.95rem; }
+.yga-sb-modal-buttons button:first-child { background-color: #e0e0e0; color: #333; }
+.yga-sb-modal-buttons button:first-child:hover { background-color: #d1d1d1; }
+.yga-sb-modal-buttons button:last-child { background-color: #32d296; color: #fff; }
+.yga-sb-modal-buttons button:last-child:hover { background-color: #28a77c; }
+.yga-sb-modal-buttons button:hover { transform: scale(1.03); }
+.yga-sb-modal-content h3.yga-sb-penalty-title { color: #d72638; }
+.yga-sb-modal-content.yga-sb-penalty { border-top: 6px solid #d72638; }
+.yga-sb-modal-content.yga-sb-borrow { border-top: 6px solid #32d296; }
+.yga-sb-modal-content.yga-sb-penalty .yga-sb-penalty-price { font-weight: 700; color: #c0392b; }
+.yga-sb-modal-content.yga-sb-ban { background-color: #f25c5c !important; color: #fff !important; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); padding: 25px 30px; border-top: none; }
+.yga-sb-modal-content.yga-sb-ban h3, .yga-sb-modal-content.yga-sb-ban p, .yga-sb-modal-content.yga-sb-ban label, .yga-sb-modal-content.yga-sb-ban input { color: #fff !important; }
+.yga-sb-modal-content.yga-sb-ban .yga-sb-modal-buttons button { background-color: white; color: #f25c5c; flex-grow: 0.5; margin: 0 auto; }
+.yga-sb-modal-content.yga-sb-ban .yga-sb-modal-buttons button:hover { background-color: #eee; }
+
+/* === BOOK DETAILS MODAL (yga-sb-bookdetails) === */
+.yga-sb-modal-content.yga-sb-bookdetails {
+  border-top: 6px solid #0a142f;
+  max-width: 520px;
+  padding: 30px 25px 35px;
+  text-align: center;
+}
+
+.yga-sb-bookdetails-cover {
+  width: 200px;
+  height: 290px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  margin-bottom: 18px;
+  background-color: #f0f0f0;
+}
+
+.yga-sb-bookdetails p {
+  margin: 6px 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.yga-sb-bookdetails-desc {
+  font-size: 0.9rem;
+  margin-top: 12px;
+  color: #555;
+  line-height: 1.4;
+  text-align: justify;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.yga-sb-bookdetails .yga-sb-modal-buttons {
+  margin-top: 20px;
+}
+
+.yga-sb-bookdetails .yga-sb-modal-buttons button:last-child {
+  background-color: #0a142f;
+  color: #fff;
+}
+
+.yga-sb-bookdetails .yga-sb-modal-buttons button:last-child:hover {
+  background-color: #121c46;
+}
+
+
+/* Responsive */
+@media (max-width: 600px) {
+  .yga-sb-bookdetails-cover {
+    width: 150px;
+    height: 220px;
+  }
+  .yga-sb-modal-content.yga-sb-bookdetails {
+    padding: 25px 20px;
+  }
+}
+
+@keyframes yga-sb-popIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes yga-sb-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* === END MODAL STYLES === */
+
+
+/* === SIDEBAR RESPONSIVENESS (REMOVED DESKTOP MARGIN/WIDTH) === */
+/* Desktop view: Sidebar doesn't affect page width/margin directly anymore */
+@media (min-width: 1001px) {
+  /* .yga-sb-page { */
+    /* REMOVED margin-left: 260px; */
+    /* REMOVED width: calc(100% - 260px); */
+    /* padding-left: 40px; */ /* Keep padding if desired */
+    /* padding-right: 40px; */
+  /* } */
+  .student-books-topbar,
+  .yga-sb-book-list {
+    /* max-width remains 1100px from default styles */
+    /* margin-left/right: auto remains from default styles */
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* Mobile view: Apply padding-bottom when bottom bar is present */
+@media (max-width: 1000px) {
+  .yga-sb-page {
+    padding-bottom: 90px; /* Height of bottom bar + buffer */
+    margin-left: 0; /* Ensure no left margin */
+    width: 100%; /* Full width */
+  }
+  /* Further mobile adjustments */
+  .student-books-topbar { flex-direction: column; align-items: stretch; max-width: none; }
+  .student-search-box, .student-dropdown-container { width: 100%; max-width: 400px; margin: 0 auto 10px auto; }
+  .student-dropdown-btn { width: 100%; }
+
+  .yga-sb-book-list { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; max-width: none; }
+  .yga-sb-book-cover { height: 240px; }
+
+  .yga-sb-modal-content { max-width: 90%; padding: 25px 20px; }
+}
+
+@media (max-width: 500px) {
+    .yga-sb-page { padding: 15px; padding-bottom: 80px; }
+    .yga-sb-book-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+    .yga-sb-book-cover { height: 195px; }
+    .yga-sb-book-title-on-card { font-size: 14px; padding: 8px 5px; }
+    .yga-sb-modal-content { padding: 25px 15px 20px; }
+    .yga-sb-modal-content input[type="number"] { width: 90%; }
+    .yga-sb-modal-content label { padding-left: 5%; }
+    .yga-sb-modal-buttons button { font-size: 0.9rem; }
+}
+

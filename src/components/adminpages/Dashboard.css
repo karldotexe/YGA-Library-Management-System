@@ -1,0 +1,507 @@
+/* ============================
+   Dashboard General & Variables
+   ============================ */
+:root {
+  --primary-color: #0A142F; /* User requested primary color */
+  --primary-light: #1c2a5a;
+  --text-primary: #1a1a1a;
+  --text-secondary: #555;
+  --text-light: #888;
+  --bg-main: #f8f9fa;
+  --bg-card: #ffffff;
+  --border-color: #e9ecef;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+  --card-radius: 12px; /* Consistent radius */
+  --grid-gap: 15px; /* Reduced gap */
+}
+
+.dashboard-container {
+  padding: 25px 30px;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-main);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.dashboard-container h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+}
+
+/* ============================
+   Grid Layout
+   ============================ */
+.dashboard-grid {
+    display: grid;
+    /* --- 4 Columns --- */
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--grid-gap); /* Use variable for gap */
+    /* Define grid areas for easier placement (optional but helpful) */
+    /* Example:
+       grid-template-areas:
+        "stat1 stat2 stat3 stat4"
+        "recent recent listB listB"
+        "recent recent listT listT";
+    */
+}
+
+/* ============================
+   Base Card Styles
+   ============================ */
+.dash-card {
+    background-color: var(--bg-card);
+    border-radius: var(--card-radius);
+    padding: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-header h3 svg {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* ============================
+   Stat Card Specific Styles
+   ============================ */
+   
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.stat-icon {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    width: 20px;
+    text-align: center;
+}
+
+.stat-card span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-top: auto;
+}
+
+.stat-card.primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.stat-card.primary .stat-icon,
+.stat-card.primary span,
+.stat-card.primary .stat-value { color: white; }
+.stat-card.primary .stat-icon { opacity: 0.8; }
+
+
+/* ============================
+   Recent Students Card
+   ============================ */
+.recent-students-card {
+    /* --- Span 2 columns --- */
+    grid-column: span 2;
+    /* --- Span multiple rows to balance height visually --- */
+    /* Adjust this based on how many stat rows you have (12 stats / 4 cols = 3 rows) */
+    grid-row: span 3;
+    min-height: 300px; /* Or adjust as needed */
+    display: flex; /* Ensure flex works */
+    flex-direction: column;
+}
+
+.student-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Take remaining space */
+    overflow-y: auto;
+    max-height: 400px; /* Adjust max height */
+   /* Nicer scrollbar */
+   scrollbar-width: thin;
+   scrollbar-color: #ccc #f0f0f0;
+}
+.student-list::-webkit-scrollbar { width: 5px; }
+.student-list::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 10px;}
+.student-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px;}
+
+.student-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer; /* Indicate clickable */
+    transition: background-color 0.1s ease;
+}
+.student-item:hover {
+    background-color: #f8f9fa; /* Slight hover */
+}
+.student-item:last-child { border-bottom: none; }
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+/* --- NEW: Style for student image --- */
+.student-avatar-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover; /* Cover the area */
+    flex-shrink: 0;
+    border: 1px solid var(--border-color); /* Optional border */
+}
+
+.student-name {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-detail {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-timestamp {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* ============================
+   Top List Card Styles
+   ============================ */
+.top-list-card {
+    /* --- Each spans 1 column by default --- */
+    grid-column: span 1;
+    /* --- Span multiple rows like recent students --- */
+    grid-row: span 3;
+    min-height: 300px;
+    display: flex; /* Ensure flex works */
+    flex-direction: column;
+}
+
+.top-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 400px; /* Match recent students */
+   /* Nicer scrollbar */
+   scrollbar-width: thin;
+   scrollbar-color: #ccc #f0f0f0;
+}
+.top-list::-webkit-scrollbar { width: 5px; }
+.top-list::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 10px;}
+.top-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px;}
+
+
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 5px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #f5f5f5;
+}
+.list-item:last-child { border-bottom: none; }
+
+.list-item .rank {
+    font-weight: 600;
+    color: var(--text-light);
+    min-width: 20px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.list-item .name {
+    flex-grow: 1;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+.list-item .count {
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: #f0f2f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    white-space: nowrap;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================
+   Loading / Error States
+   ============================ */
+.dashboard-loading,
+.dashboard-error {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2rem;
+    color: #555;
+}
+.dashboard-error {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+/* ================================================= */
+/* --- 🧑‍🎓 NEW STUDENT DETAILS MODAL STYLES 🧑‍🎓 --- */
+/* ================================================= */
+
+.modal-overlay.student-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 20, 47, 0.7); /* Use primary dark as base */
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-content.student-modal-content {
+  background: var(--bg-card);
+  border-radius: var(--card-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 30px 35px;
+  max-width: 500px; /* Moderate width for details */
+  width: 100%;
+  max-height: 90vh;
+  display: flex; /* Keep flex */
+  flex-direction: column; /* Stack image and details */
+  align-items: center; /* Center items */
+  position: relative;
+  border: 1px solid var(--border-color);
+  animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto; /* Allow modal itself to scroll if needed */
+}
+
+/* Re-use general modal close button style if defined elsewhere, or use this: */
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+.modal-close-btn:hover { background: #e0e0e0; color: #111; transform: scale(1.05); }
+
+
+.modal-student-image {
+    width: 120px; /* Large profile pic */
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid white; /* White border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Shadow */
+    flex-shrink: 0;
+}
+
+.modal-student-details {
+    text-align: center; /* Center details text */
+    width: 100%;
+}
+
+.modal-student-details h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary-color); /* Use theme color */
+    margin: 0 0 15px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for details */
+    gap: 10px 20px; /* Row and column gap */
+    text-align: left; /* Align text within grid left */
+    margin-bottom: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.details-grid p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.details-grid p strong {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-right: 6px;
+    display: block; /* Stack label */
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+
+.detail-email {
+    grid-column: span 2; /* Make email span full width */
+     word-break: break-all; /* Break long emails */
+}
+
+
+/* ============================
+   Responsive Design
+   ============================ */
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        /* Switch to 2 columns */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* Ensure all cards span 1 column in a 2-column layout */
+    .dash-card,
+    .recent-students-card,
+    .top-list-card {
+        grid-column: span 1 !important; /* Force span 1 */
+        grid-row: auto !important; /* Reset row span */
+        min-height: auto !important; /* Reset min height */
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 20px 15px;
+    }
+     .dashboard-container h1 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+   }
+    .dashboard-grid {
+        /* Switch to 1 column */
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .dash-card,
+    .recent-students-card,
+    .top-list-card {
+        grid-column: span 1 !important; /* Explicitly span 1 */
+        padding: 15px;
+    }
+    .stat-value {
+        font-size: 1.8rem;
+    }
+     .card-header h3 {
+        font-size: 0.95rem;
+    }
+    .list-item {
+        font-size: 0.8rem;
+    }
+     .student-name { font-size: 0.85rem; }
+     .student-detail { font-size: 0.7rem; }
+     .student-timestamp { font-size: 0.7rem; }
+     .student-avatar-img { width: 32px; height: 32px; } /* Consistent size */
+
+    /* --- Modal Responsive --- */
+     .modal-content.student-modal-content {
+        padding: 25px 20px;
+        max-width: 90%;
+     }
+     .modal-student-image {
+        width: 100px;
+        height: 100px;
+     }
+     .modal-student-details h3 {
+        font-size: 1.4rem;
+     }
+     .details-grid {
+        grid-template-columns: 1fr; /* Stack details */
+     }
+     .detail-email {
+         grid-column: span 1; /* Reset span */
+     }
+
+}

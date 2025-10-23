@@ -1,0 +1,172 @@
+.requests-page {
+  padding: 24px;
+  background-color: #f8fafc;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.requests-page__header {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 16px;
+}
+
+.requests-page__empty {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+
+
+.requests-page__card {
+  display: flex;
+  align-items: flex-start;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+.requests-page__book-image img {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.requests-page__book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.requests-page__book-title {
+  font-weight: 600;
+  color: black;
+  font-size: 16px;
+}
+
+.requests-page__book-author,
+.requests-page__book-year,
+.requests-page__book-genre {
+  font-size: 14px;
+  color: #2b2b2b;
+}
+
+.requests-page__borrower-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 150px;
+}
+
+.requests-page__borrower-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.requests-page__loan-days {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.requests-page__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-box{
+
+  max-width: auto;
+}
+
+.requests-page__btn-decline {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.requests-page__btn-accept {
+  background-color: #9cf5aa;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #FFFFFF;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal-buttons button:first-child {
+  background-color: #ccc;
+}
+
+.modal-buttons button:last-child {
+  background-color: #dc2626;
+  color: white;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .requests-page__card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .requests-page__borrower-info {
+    min-width: auto;
+  }
+
+  .requests-page__actions {
+    flex-direction: row;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,153 @@
+.registeredlist-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  background: #f8f8f5;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  height: 100vh;
+  max-height: auto;
+}
+
+/* 🔍 Search bar styling */
+.search-container,
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.search-container input,
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.search-icon {
+  color: #555;
+  font-size: 18px;
+}
+
+/* 📋 Table styling */
+.registeredlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #bfc3c9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  table-layout: auto;
+}
+
+.registeredlist-table th,
+.registeredlist-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #bfc3c9;
+}
+
+.registeredlist-table th {
+  background: #011a3e; /* deep blue header */
+  color: white;
+  font-weight: 500;
+}
+
+.registeredlist-table tbody tr:hover {
+  background-color: #f9fafc;
+  transition: 0.2s;
+}
+
+/* 🟢 Action buttons */
+.view-btn {
+  background: #3d7cf7;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #2d6ae0;
+}
+
+.delete-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #ff4c4c;
+}
+
+.no-registered {
+  text-align: center;
+  color: #777;
+  margin-top: 50px;
+  font-size: 18px;
+}
+
+/* --------------------------- */
+/* 📱 Responsive adjustments */
+@media (max-width: 1200px) {
+  .registeredlist-page {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .search-container,
+  .search-box {
+    max-width: 100%;
+  }
+
+  .registeredlist-table th,
+  .registeredlist-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .view-btn,
+  .delete-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .registeredlist-page {
+    padding: 15px;
+  }
+
+  .registeredlist-table th,
+  .registeredlist-table td {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  .view-btn,
+  .delete-btn {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+}

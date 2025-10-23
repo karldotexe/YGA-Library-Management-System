@@ -1,0 +1,279 @@
+/* ----------------------------- */
+/* EditProfile Page Container */
+/* ----------------------------- */
+.editprofile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* ----------------------------- */
+/* Card */
+.editprofile-card {
+  background-color: #F9F6EE; /* soft cream */
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+/* Header bar */
+.editprofile-header {
+  height: 25px;
+  background-color: #0a0f29; /* navy */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Content */
+.editprofile-content {
+  padding: 25px 30px;
+}
+
+.editprofile-content h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Input Groups */
+.editprofile-input-group {
+  margin-bottom: 18px;
+  margin-right: 15px;
+
+}
+
+.editprofile-input-group select {
+
+  flex: 1;
+  padding: 10px 12px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  width: 450px;
+  margin-right: 40px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+
+.editprofile-input-group label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.editprofile-input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  background-color: #fff;
+  transition: border 0.2s ease-in-out;
+}
+
+.editprofile-input-group input:focus {
+  border-color: #0a0f29;
+}
+
+/* Messages */
+.editprofile-error {
+  color: #ff4d4f;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.editprofile-success {
+  color: #4caf50;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Buttons */
+.editprofile-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+
+.editprofile-cancel-btn,
+.editprofile-save-btn {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 120px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Cancel button style */
+.editprofile-cancel-btn {
+  background-color: #e6e6e6;
+  color: #222;
+}
+
+.editprofile-cancel-btn:hover {
+  background-color: #d9d9d9;
+}
+
+/* Save button style */
+.editprofile-save-btn {
+  background-color: #b1ffb6;
+  color: #222;
+}
+
+.editprofile-save-btn:hover {
+  background-color: #9df3a6;
+}
+
+/* Disabled state */
+.editprofile-cancel-btn:disabled,
+.editprofile-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+
+/* ----------------------------- */
+/* Responsiveness */
+/* ----------------------------- */
+@media (max-width: 600px) {
+  .editprofile-card {
+    width: 90%;
+  }
+
+  .editprofile-button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .editprofile-cancel-btn,
+  .editprofile-save-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+/* Form with avatar layout */
+.editprofile-form-with-avatar {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.editprofile-form-fields {
+  flex: 1;
+  min-width: 250px;
+}
+
+.editprofile-avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.editprofile-avatar-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #0a0f29;
+}
+
+.editprofile-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.choose-avatar-btn {
+  display: inline-block;
+  background-color: #0b1437;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.choose-avatar-btn input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* Avatar on top */
+.editprofile-avatar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.editprofile-avatar-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #0a0f29;
+}
+
+.editprofile-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.choose-avatar-btn {
+  display: inline-block;
+  background-color: #0b1437;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.choose-avatar-btn input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,109 @@
+.overduehistory-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: calc(100% - 220px);
+  margin-left: 120px;
+  background: #f8f8f5;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+
+/* 🔍 Search bar */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 10px 15px;
+  width: 100%;
+  max-width: 1140px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+}
+
+.search-icon {
+  color: #555;
+  font-size: 18px;
+}
+
+/* 📚 Table */
+.overduehistory-table {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #bfc3c9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  table-layout: auto;
+}
+
+.overduehistory-table th,
+.overduehistory-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #bfc3c9;
+}
+
+.overduehistory-table th {
+  background: #011a3e;
+  color: white;
+  font-weight: 500;
+}
+
+.overduehistory-table tbody tr:hover {
+  background-color: #f9fafc;
+  transition: 0.2s;
+}
+
+.no-overduehistory {
+  text-align: center;
+  color: #777;
+  margin-top: 50px;
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .overduehistory-page {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .overduehistory-table th,
+  .overduehistory-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .overduehistory-page {
+    padding: 15px;
+  }
+
+  .overduehistory-table th,
+  .overduehistory-table td {
+    font-size: 11px;
+    padding: 6px;
+  }
+}

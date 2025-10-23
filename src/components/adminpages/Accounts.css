@@ -1,0 +1,121 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.register-form {
+  background-color: #F9F6EE;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.register-form label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.register-form input,
+.register-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%; /* Ensure inputs fill container */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.password-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%; /* Ensure div fills container */
+}
+
+.password-field input {
+  flex: 1;
+  padding-right: 35px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #444;
+}
+
+.register-btn {
+  background: #9af7b6;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px; /* Add space before button */
+}
+
+.register-btn:hover {
+  background: #7fe29e;
+}
+
+/* New style for individual field errors */
+.form-error-message {
+  color: red;
+  font-size: 12px;
+  margin: -8px 0 0 0; /* Pulls message up under the input */
+  text-align: left;
+}
+
+
+/* Renamed from .form-message */
+.form-message-error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* New style for success message */
+.form-message-success {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+
+.form-header {
+  background: #0A142F; /* black bar */
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px 12px 0 0; /* rounded only top corners */
+  margin: -30px -30px 20px -30px; /* overlap inside form padding */
+}
+
+.form-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Account-list-btn{  
+  position: absolute;
+  top: 160px;
+  right: 80px;
+  background-color: #0b1437;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  font-size: 14px;
+}

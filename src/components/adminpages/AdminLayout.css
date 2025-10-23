@@ -1,0 +1,33 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 260px; /* desktop default */
+  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+/* ✅ Tablet & smaller */
+@media (max-width: 1000px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+/* ✅ Phone */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding-bottom: 60px; /* leave space for bottom nav */
+  }
+}

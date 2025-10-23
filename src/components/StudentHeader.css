@@ -1,0 +1,140 @@
+.student-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px 40px;
+  border-bottom: 2px solid #ccc;
+  height: 90px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* === LEFT SECTION === */
+.student-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.student-header-logo {
+  width: 130px;
+  height: auto;
+  object-fit: contain;
+}
+
+.student-header-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0A142F;
+}
+
+/* === RIGHT SECTION === */
+.student-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.student-header-bell {
+  font-size: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.student-header-bell:hover {
+  color: #0A142F;
+}
+
+/* === PROFILE AVATAR & DROPDOWN === */
+.student-header-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.student-header-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #000000;
+}
+
+/* === DROPDOWN MENU === */
+.student-dropdown {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background-color: rgba(10, 20, 47, 0.85);
+  border-radius: 10px;
+  padding: 15px;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+}
+
+.student-dropdown-item {
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  font-size: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s ease;
+}
+
+.student-dropdown-item:hover {
+  color: #c7d2ff;
+}
+
+.student-dropdown-divider {
+  border: 0;
+  border-top: 1px solid #fff;
+  margin: 8px 0;
+}
+
+.student-dropdown-item.logout {
+  color: #ff9f9f;
+}
+
+.student-dropdown-item.logout:hover {
+  color: #ff6b6b;
+}
+
+/* === ICON SIZE === */
+.student-dropdown-item svg {
+  font-size: 18px;
+}
+
+
+
+
+
+/* ✅ Responsive: hide logo text on smaller screens */
+@media (max-width: 768px) {
+  .student-header {
+    padding: 15px 25px;
+  }
+
+  .student-header-title {
+    font-size: 20px;
+  }
+
+  .student-header-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .student-dropdown {
+    width: 150px;
+  }
+}

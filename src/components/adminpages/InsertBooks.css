@@ -1,0 +1,350 @@
+/* ============================
+   Page Container
+   ============================ */
+.insert-book-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Use min-height for flexibility, avoid fixed height */
+  min-height: 90vh;
+  background-color: #f8f8f5;
+  position: relative;
+  font-family: "Inter", sans-serif;
+  padding: 40px 20px; /* Add padding for spacing */
+  box-sizing: border-box;
+}
+
+/* ============================
+   Back Button
+   ============================ */
+.insert-book-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  z-index: 5;
+}
+
+.insert-book-back-btn:hover {
+  color: #0A142F;
+}
+
+.insert-book-back-icon {
+  font-size: 20px;
+}
+
+/* ============================
+   Form Container
+   ============================ */
+/* Consolidated definition */
+.insert-book-form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center; /* Center items horizontally */
+  gap: 60px;
+  background-color: #fff; /* Use background-color */
+  padding: 40px; /* Simplified padding */
+  border-radius: 16px; /* Use consistent border-radius */
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.08);
+  margin-top: 20px; /* Keep margin */
+  width: 100%; /* Allow form to take width */
+  max-width: 700px; /* Limit max width */
+  box-sizing: border-box;
+}
+
+/* ============================
+   Image Upload Area
+   ============================ */
+/* Consolidated definition */
+.insert-book-image-upload {
+  position: relative; /* Needed for absolute positioned input */
+  overflow: hidden; /* Hide overflowing input */
+  width: 180px; /* Final width */
+  height: 260px; /* Final height */
+  background: #d9d9d9;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s; /* Added background transition */
+  flex-shrink: 0; /* Prevent image area from shrinking */
+}
+
+.insert-book-image-upload:hover {
+  transform: scale(1.02); /* Keep hover effect */
+  background: #cfcfcf; /* Keep hover background */
+}
+
+.insert-book-image-upload input[type="file"] {
+  position: absolute;
+  inset: 0; /* Cover the entire area */
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Make it invisible */
+  cursor: pointer;
+}
+
+.insert-book-placeholder {
+  font-size: 48px;
+  color: #555;
+}
+
+.insert-book-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ============================
+   Book Input Fields
+   ============================ */
+/* Consolidated definition */
+.insert-book-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Final gap */
+  width: 100%; /* Take remaining width */
+  max-width: 400px; /* Limit input area width */
+}
+
+/* Label + input side by side */
+.insert-book-fields label {
+  display: flex;
+  /* Changed from 'center' to 'flex-start' to align labels with the top 
+     of textareas, which also works well for single-line inputs. */
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Label text fixed width, input stretches */
+.insert-book-fields label span {
+  width: 80px; /* Slightly reduced width for better fit */
+  text-align: right;
+  flex-shrink: 0; /* Prevent shrinking */
+  /* Add a little padding to visually align span text with input text */
+  padding-top: 10px;
+}
+
+/* Grouped inputs and textareas to share styles */
+.insert-book-fields input,
+.insert-book-fields textarea {
+  flex: 1; /* Allow input to take remaining space */
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  box-sizing: border-box; /* Include padding/border in width */
+  font-family: "Inter", sans-serif; /* Ensure font matches */
+}
+
+/* Specific styles for the textarea */
+.insert-book-fields textarea {
+  resize: vertical; /* Allow vertical resizing only */
+  min-height: 100px; /* Set a default height */
+  line-height: 1.4; /* Improve readability */
+}
+
+
+.insert-book-description span {
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-right: 5px;
+}
+
+.insert-book-description textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.insert-book-description textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+
+
+/* Grouped focus styles for inputs and textareas */
+.insert-book-fields input:focus,
+.insert-book-fields textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(10, 20, 47, 0.2);
+}
+
+/* Styles for smaller grouped inputs if needed (kept from original) */
+.insert-book-small-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.insert-book-small-inputs label {
+  flex: 1;
+  /* Removed overrides from original code as base label style is sufficient */
+}
+
+/* ============================
+   Submit Button
+   ============================ */
+/* Consolidated definition */
+.insert-book-form button[type="submit"] { /* Targeted more specifically */
+  margin-top: 20px;
+  /* margin-left: auto; Removed margin-left: 40px, use auto for centering */
+  margin-right: auto;
+  display: block; /* Needed for margin auto centering */
+  text-align: center;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #b9f7b0;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 75%; /* Keep width */
+  max-width: 300px; /* Add max-width */
+  box-sizing: border-box;
+}
+
+.insert-book-form button[type="submit"]:hover { /* Targeted more specifically */
+  background-color: #9ee89b;
+  transform: translateY(-1px);
+}
+
+.insert-book-form button[type="submit"]:disabled { /* Style for disabled state */
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Base style for messages */
+.insert-book-success-message,
+.insert-book-error-message {
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 15px; /* Space below the message */
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+/* Success Message Specific Styles */
+.insert-book-success-message {
+  color: #155724; /* Dark green text */
+  background-color: #d4edda; /* Light green background */
+  border-color: #c3e6cb; /* Slightly darker green border */
+}
+
+/* Error Message Specific Styles (Optional but recommended) */
+.insert-book-error-message {
+  color: #721c24; /* Dark red text */
+  background-color: #f8d7da; /* Light red background */
+  border-color: #f5c6cb; /* Slightly darker red border */
+}
+
+/* --- Adjustments for Description Label alignment if needed --- */
+/* If the description label/textarea looks misaligned with others */
+.insert-book-fields label.insert-book-description {
+    align-items: flex-start; /* Align label span to the top */
+}
+.insert-book-fields label.insert-book-description span {
+    padding-top: 10px; /* Adjust padding to vertically align with textarea */
+     /* You might need to adjust the width if it wraps undesirably */
+     /* width: 90px; */ /* Example: if other spans are 80px */
+}
+
+
+/* ============================
+   Responsiveness (Merged Media Query)
+   ============================ */
+@media (max-width: 1000px) {
+  /* Apply tablet/mobile adjustments */
+  .insert-book-page {
+    /* height: auto; Implied by min-height */
+    padding: 60px 20px 40px; /* Adjust padding, more top space for back button */
+  }
+
+  .insert-book-form {
+    flex-direction: column; /* Stack vertically */
+    align-items: center; /* Center items */
+    gap: 40px; /* Adjusted gap */
+    padding: 30px 20px; /* Reduced padding */
+    max-width: 500px; /* Allow slightly wider form on tablets */
+  }
+
+  .insert-book-fields {
+    width: 100%; /* Take full width within container */
+    max-width: 400px; /* Keep max width for inputs */
+    gap: 12px; /* Slightly increased gap */
+  }
+
+  /* Adjust label span width if needed on smaller screens */
+  .insert-book-fields label span {
+    width: 90px;
+  }
+
+  .insert-book-image-upload {
+    width: 160px; /* Smaller image */
+    height: 230px; /* Adjusted height */
+  }
+
+  .insert-book-form button[type="submit"] { /* Targeted more specifically */
+    width: 100%; /* Full width button */
+    max-width: 400px; /* Consistent max width */
+    font-size: 15px;
+    margin-left: auto; /* Ensure centering */
+    margin-right: auto;
+  }
+
+  .insert-book-back-btn { /* Make back button easier to tap */
+    top: 15px;
+    left: 15px;
+  }
+}
+
+/* Optional: Further adjustments for very small screens */
+@media (max-width: 480px) {
+  .insert-book-fields label {
+    flex-direction: column; /* Stack label text above input */
+    align-items: flex-start; /* Align items left */
+    gap: 5px; /* Reduce gap */
+  }
+  .insert-book-fields label span {
+    width: 100%; /* Full width */
+    text-align: left; /* Align left */
+    padding-top: 0; /* --- ADDED: Reset padding for stacked layout --- */
+  }
+
+  /* --- MODIFIED --- */
+  /* Grouped input and textarea for mobile */
+  .insert-book-fields input,
+  .insert-book-fields textarea {
+    width: 100%; /* Full width input */
+  }
+  .insert-book-form {
+    gap: 30px;
+  }
+
+  .insert-book-fields label.insert-book-description span {
+        padding-top: 0;
+    }
+}

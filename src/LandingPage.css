@@ -1,0 +1,796 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Paytone+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.Page-Container{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.About-Page, .Books-Page, .First-Page {
+    background-color: whitesmoke;
+    box-sizing: border-box;
+}
+
+.About-Page {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 20px;
+}
+
+.First-Page {
+    position: relative;
+    width: 100vw; /* full viewport width */
+    height: 100vh; /* full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: whitesmoke;
+}
+
+.Books-Page{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Navbar */
+.NavBarContainer {
+  box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #0A142F;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+}
+
+.NavTextContainer {
+    margin-left: 20px;
+    display: flex;
+    gap: 60px;
+}
+
+.NavText {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.NavText:hover {
+    color: teal;
+}
+
+/* Logos */
+.LibLogoContainer {
+    margin-right: 170px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#LibLogoId {
+    height: 140px;
+    width: auto;
+}
+
+.YGALogoContainer {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#YGALogoId {
+    height: 105px;
+    width: auto;
+    border-radius: 50%;
+}
+
+/* Hero Section */
+.H1-Container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#H1Page1 {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.H1-Container h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: clamp(2rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 7px 2px 8px rgba(0,0,0,0.6);
+    width: 90%;
+    z-index: 2;
+}
+
+/* Hero Buttons */
+.ButtonGroup {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 20px;
+    z-index: 3;
+}
+
+.ButtonGroup button {
+    width: 110px;
+    font-weight: bold;
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.ButtonGroup a {
+    text-decoration: none;
+}
+
+.LogIn {
+    background-color: #CBFFF2;
+}
+
+.LogIn:hover {
+    transform: scale(1.05);
+}
+
+.SignUp {
+    background-color: #0A142F;
+    color: white;
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.SignUp:hover {
+    transform: scale(1.05);
+}
+
+/* About Page */
+.About-Page h2{
+    padding-top: 90px;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    text-align: center;
+}
+
+.About-Page .Main-Container{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+}
+
+.Content-Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 50px;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.HighlightText {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.Text-Container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+}
+
+.Text-Container h1 {
+    text-align: left;
+    font-size: 45px;
+    margin: 0;
+}
+
+.Text-Container h3 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.AboutCardContainer {
+    flex-shrink: 0;
+    width: 390px;
+    max-width: 100%;
+    margin-left: 40px;
+    display: flex !important;
+    justify-content: center !important;
+    border-radius: 12px;
+    overflow: hidden;
+    visibility: visible !important;
+}
+
+#AboutCardId {
+    width: 100%;
+    height: auto;
+    display: block !important;
+    object-fit: cover;
+}
+
+/* Mission & Vision Section */
+.mission-vision-container {
+  max-width: 1200px;
+  width: 90%;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.mission-section, .vision-section {
+  background: #1a2a6c;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.vision-section {
+  background: #3472ee;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+}
+
+.mission-section:hover, .vision-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.mission-header {
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+
+.vision-header {
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+
+.mission-header h3, .vision-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.mission-content, .vision-content {
+  padding: 30px;
+
+  line-height: 1.7;
+}
+
+.mission-content p, .vision-content p {
+  font-size: 1.1rem;
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+}
+
+
+
+/* Books Page */
+.lp-books-page {
+    min-height: auto;
+    padding: 100px 20px 50px 20px;
+    width: 100%;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+}
+
+.lp-books-page .lp-h2-container {
+    font-size: 30px;
+    text-align: center;
+    font-weight: 700;
+    color: #0A142F;
+    margin-bottom: 30px;
+}
+
+.lp-book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.lp-book-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    /* Updated transition to include transform */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.lp-book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* --- NEWLY ADDED --- */
+/* Adds the "press down" effect on click */
+.lp-book-card:active {
+    transform: scale(0.97) translateY(0); /* Click-down effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+/* ------------------- */
+
+
+.lp-book-cover {
+    width: 100%;
+    height: 270px; /* Fixed height for a uniform grid */
+    object-fit: cover;
+    display: block;
+}
+
+.lp-book-overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 20, 47, 0.75); /* Dark blue from navbar */
+    color: white;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lp-book-card:hover .lp-book-overlay-text {
+    opacity: 1;
+}
+
+.lp-no-books {
+    text-align: center;
+    color: #777;
+    margin-top: 30px;
+    font-size: 16px;
+    grid-column: 1 / -1; /* Make it span the full grid if no books */
+}
+
+/* ================================================== */
+/* UNIQUE MODAL STYLES (lp-book-detail-modal-)   */
+/* ================================================== */
+
+.lp-book-detail-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    padding: 20px;
+    box-sizing: border-box;
+    
+    /* --- NEWLY ADDED --- */
+    animation: lpModalFadeIn 0.2s ease-out;
+    /* ------------------- */
+}
+
+.lp-book-detail-modal-content {
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    gap: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
+    /* --- NEWLY ADDED --- */
+    animation: lpModalScaleIn 0.2s ease-out;
+    /* ------------------- */
+}
+
+.lp-book-detail-modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #eee;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    z-index: 1003;
+}
+.lp-book-detail-modal-close-button:hover {
+    background: #ddd;
+}
+
+.lp-book-detail-modal-cover {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.lp-book-detail-modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.lp-book-detail-modal-info h3 {
+    font-size: 2rem;
+    color: #0A142F;
+    margin: 0;
+}
+
+.lp-book-detail-modal-info .lp-book-detail-modal-author {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #333;
+    margin-top: -5px;
+}
+
+.lp-book-detail-modal-info .lp-book-detail-modal-description {
+    margin-top: 15px;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.lp-book-detail-modal-info .lp-book-detail-modal-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.lp-book-detail-modal-info .lp-book-detail-modal-detail-item {
+    background: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* ================================================== */
+/* --- NEW: SCROLL TO TOP BUTTON ---                  */
+/* ================================================== */
+.lp-scroll-to-top-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 45px;
+  height: 45px;
+  background-color: #14244f; /* Same as navbar */
+  color: #fff;
+  border-radius: 50%;
+  
+  /* --- MODIFIED FOR ICON --- */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem; /* Adjusted size for the icon */
+  /* text-align and line-height removed */
+  
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: all 0.3s ease-in-out;
+  animation: lpScrollBtnFadeIn 0.3s ease-out;
+}
+
+.lp-scroll-to-top-btn:hover {
+  background-color: #3472ee; /* Lighter blue on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* =========================== */
+/* RESPONSIVE DESIGN */
+/* =========================== */
+
+/* Tablet Devices (768px - 1024px) */
+@media (max-width: 1024px) {
+    /* Navbar */
+    .LibLogoContainer, .YGALogoContainer { display: none; }
+    .NavBarContainer {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 20px;
+        justify-content: center;
+    }
+    .NavTextContainer {
+        margin-left: 0;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        width: 100%;
+    }
+    .NavText { font-size: 1rem; padding: 8px 0; }
+
+    /* Hero Section */
+    .H1-Container { margin-top: 150px; }
+    #H1Page1 { width: 100vw; height: 100vh; }
+
+    /* About Page */
+    .About-Page { text-align: center; }
+    .About-Page h2 { font-size: 36px; padding-top: 80px; }
+    .Content-Container { flex-direction: column; text-align: center; gap: 40px; }
+    .Text-Container { max-width: 100%; text-align: center; }
+    .Text-Container h1 { font-size: 36px; text-align: center; }
+    .Text-Container h3 { font-size: 18px; }
+    .AboutCardContainer {
+        margin-left: 0;
+        max-width: 390px;
+        display: flex !important;
+        justify-content: center !important;
+        visibility: visible !important;
+    }
+    #AboutCardId { display: block !important; visibility: visible !important; }
+
+    /* Mission & Vision Section */
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        width: 95%;
+    }
+    
+    .mission-header h3, .vision-header h3 {
+        font-size: 1.6rem;
+    }
+    
+    .mission-content p, .vision-content p {
+        font-size: 1.05rem;
+    }
+
+    /* Books Page */
+    .lp-book-list {
+        /* Adjust grid for tablets */
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        padding: 0 10px;
+    }
+    .lp-book-cover {
+        height: 240px; /* Shorter height for smaller grid items */
+    }
+}
+
+/* Mobile Devices (<768px) */
+@media (max-width: 768px) {
+    /* Hero Buttons */
+    .ButtonGroup { top: 70%; flex-direction: column; gap: 12px; }
+    .ButtonGroup button { width: 100px; padding: 8px 16px; }
+
+    /* About Page */
+    .AboutCardContainer { width: 100%; max-width: 300px; margin: 20px auto; }
+    #AboutCardId { width: 100%; height: auto; }
+
+    /* Mission & Vision Section */
+    .mission-vision-container {
+        margin: 30px auto;
+        gap: 20px;
+    }
+    
+    .mission-header, .vision-header {
+        padding: 20px;
+    }
+    
+    .mission-content, .vision-content {
+        padding: 25px 20px;
+    }
+    
+    .mission-header h3, .vision-header h3 {
+        font-size: 1.4rem;
+    }
+    
+    .mission-content p, .vision-content p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Books Page */
+    .lp-book-list {
+        /* 2 columns for mobile */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+    }
+    .lp-book-cover {
+        height: 210px;
+    }
+    .lp-book-overlay-text {
+        font-size: 0.8rem;
+        padding: 8px 5px;
+        opacity: 1; /* Always show on mobile, as hover isn't reliable */
+    }
+
+    /* ------ Modal Responsive ------ */
+    .lp-book-detail-modal-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 25px;
+        padding-top: 40px; /* More space for close button */
+    }
+    .lp-book-detail-modal-cover {
+        width: 150px;
+        height: 225px;
+    }
+    .lp-book-detail-modal-info h3 {
+        font-size: 1.5rem;
+    }
+    .lp-book-detail-modal-info .lp-book-detail-modal-author {
+        font-size: 1.1rem;
+    }
+    .lp-book-detail-modal-info .lp-book-detail-modal-details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small Mobile (<500px) */
+@media (max-width: 500px) {
+    /* Navbar */
+    .NavBarContainer { padding: 10px 12px; }
+    .NavText { font-size: 0.9rem; }
+
+    /* Hero Section */
+    .H1-Container { margin-top: 100px; }
+   g.ButtonGroup { top: 75%; gap: 10px; }
+
+    /* About Page */
+    .About-Page h2 { font-size: 28px; padding-top: 70px; }
+    .Text-Container h1 { font-size: 24px; }
+    .Text-Container h3 { font-size: 15px; }
+    .AboutCardContainer { min-width: 80px; }
+
+    /* Mission & Vision Section */
+    .mission-vision-container {
+        margin: 20px auto;
+        gap: 15px;
+    }
+    
+    .mission-header, .vision-header {
+        padding: 15px;
+    }
+    
+    .mission-content, .vision-content {
+        padding: 20px 15px;
+    }
+    
+   g.mission-header h3, .vision-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .mission-content p, .vision-content p {
+        font-size: 0.95rem;
+    }
+
+    /* Books Page */
+    .lp-books-page .lp-h2-container { font-size: 26px; }
+    .lp-book-list {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+    }
+    .lp-book-cover {
+        height: 190px;
+    }
+
+    /* ------ Modal Responsive ------ */
+    .lp-book-detail-modal-cover {
+        width: 130px;
+        height: 195px;
+    }
+    .lp-book-detail-modal-info h3 {
+        font-size: 1.3rem;
+    }
+    .lp-book-detail-modal-info .lp-book-detail-modal-author {
+        font-size: 1rem;
+    }
+    .lp-book-detail-modal-info .lp-book-detail-modal-description {
+        font-size: 0.9rem;
+    }
+}
+
+/* ================================================== */
+/* --- NEWLY ADDED: MODAL ANIMATION KEYFRAMES ---     */
+/* ================================================== */
+@keyframes lpModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lpModalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
