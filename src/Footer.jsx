@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaYoutube, FaEnvelope, FaPhone } from "react-icons/fa";
 import "./Footer.css";
-import YGALogo from "./images/ygalogo.png";
+import YGALogo from "./images/YGAlogo.png";
 
 function Footer() {
   const navigate = useNavigate();
