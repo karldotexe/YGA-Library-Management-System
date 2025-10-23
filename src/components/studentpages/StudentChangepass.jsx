@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { supabase } from "../../../supabase-client";
-import "./StudentChangePass.css"; // reuse existing styles
+import "./StudentChangepass.css";
 
 function StudentChangePass() {
   const navigate = useNavigate();
