@@ -14,7 +14,7 @@ import {
   FaTimesCircle,   // --- Added icon for Lost Books ---
 } from "react-icons/fa";
 import "./AdminSidebar.css";
-import liblogo from "../images/liblogo.png";
+import liblogo from "../images/LibLogo.png";
 
 function AdminSidebar() {
   const [isBooksOpen, setIsBooksOpen] = useState(false);
@@ -164,7 +164,7 @@ function AdminSidebar() {
         )}
 
       </nav>
-      {/* Footer */}
+      
       <div className="sidebar-footer">
         <hr className="sidebar-divider footer-divider" />
         All Rights Reserved @ Young Generation Academy of Caloocan, Inc | {new Date().getFullYear()} {/* Dynamically set year */}
