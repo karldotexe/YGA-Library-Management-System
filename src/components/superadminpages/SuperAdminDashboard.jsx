@@ -118,29 +118,38 @@ export default function SuperAdminDashboard() {
       }
 
       // Merge data for table and sort most recent first
-        const mergedTransactions = filteredBorrowed
-          .map((b) => {
-            const student = students?.find((s) => s.auth_user_id === b.student_id);
-            const book = books?.find((bk) => bk.book_id === b.book_id);
-            return {
-              id: b.id,
-              borrower: student?.full_name || "Unknown Student",
-              grade: student?.grade || "-",
-              section: student?.section || "-",
-              bookTitle: book?.title || "Unknown Book",
-              author: book?.author || "-",
-              borrowDate: new Date(b.created_at).toLocaleDateString(),
-              createdAt: b.created_at, // for sorting
-              returnDate: b.return_date
-                ? new Date(b.return_date).toLocaleDateString()
-                : "Not Returned",
-              penalty: b.penalty_fee ? `₱${b.penalty_fee}` : "None",
-              processedBy: b.processed_by || "N/A",
-              status: b.status
-                ? b.status.charAt(0).toUpperCase() + b.status.slice(1).toLowerCase()
-                : "-",
-            };
-          })
+       // Merge data for table and sort most recent first
+        const mergedTransactions = filteredBorrowed
+          .map((b) => {
+            const student = students?.find((s) => s.auth_user_id === b.student_id);
+            const book = books?.find((bk) => bk.book_id === b.book_id);
+
+            // Check for lost status, consistent with KPI logic
+            const isLost =
+              b.status?.toLowerCase().includes("lost") ||
+              b.penalty_status?.toLowerCase().includes("lost");
+
+            return {
+              id: b.id,
+              borrower: student?.full_name || "Unknown Student",
+              grade: student?.grade || "-",
+              section: student?.section || "-",
+              bookTitle: book?.title || "Unknown Book",
+              author: book?.author || "-",
+              borrowDate: new Date(b.created_at).toLocaleDateString(),
+              createdAt: b.created_at, // for sorting
+              // MODIFIED LOGIC: If it's lost OR has no return date, show "Not Returned"
+              returnDate:
+                isLost || !b.return_date
+                  ? "Not Returned"
+                  : new Date(b.return_date).toLocaleDateString(),
+              penalty: b.penalty_fee ? `₱${b.penalty_fee}` : "None",
+              processedBy: b.processed_by || "N/A",
+              status: b.status
+                ? b.status.charAt(0).toUpperCase() + b.status.slice(1).toLowerCase()
+                : "-",
+            };
+          })
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // SORT HERE
 
 
@@ -402,7 +411,7 @@ setTransactions(filteredTransactions);
           <h4>
             Borrowing Transactions
             <button className="export-pdf-btn" onClick={() => window.print()}>
-              Print PDF
+              Print
             </button>
           </h4>
 

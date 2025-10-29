@@ -146,7 +146,7 @@ function AdminSidebar() {
               }
             >
               <FaClock className="sidebar-icon sub-icon" />{" "}
-              <span>Overdue History</span>
+              <span>Overdue</span>
             </NavLink>
             <NavLink
               to="/admin/lostbooks"

@@ -7,6 +7,10 @@ export default function LostBooks() {
   const [lostBooks, setLostBooks] = useState([]);
   const [search, setSearch] = useState("");
 
+  // State for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBorrowId, setSelectedBorrowId] = useState(null);
+
   useEffect(() => {
     fetchLostBooks();
   }, []);
@@ -66,8 +70,7 @@ export default function LostBooks() {
   };
 
   const handlePayPenalty = async (borrowId) => {
-    if (!window.confirm("Mark penalty as paid?")) return;
-
+    // This function is now called by the modal, not directly
     try {
       const { error } = await supabase
         .from("borrowed_books")
@@ -82,6 +85,27 @@ export default function LostBooks() {
       alert("Failed to mark penalty as paid.");
     }
   };
+
+  // --- Modal Helper Functions ---
+
+  const openConfirmationModal = (borrowId) => {
+    setSelectedBorrowId(borrowId);
+    setIsModalOpen(true);
+  };
+
+  const closeConfirmationModal = () => {
+    setSelectedBorrowId(null);
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmPay = async () => {
+    if (selectedBorrowId) {
+      await handlePayPenalty(selectedBorrowId);
+    }
+    closeConfirmationModal();
+  };
+
+  // --- End Modal Helper Functions ---
 
   const filtered = lostBooks.filter(
     (b) =>
@@ -135,13 +159,42 @@ export default function LostBooks() {
                   {lb.penalty_status === "paid" ? (
                     <button disabled>Paid</button>
                   ) : (
-                    <button onClick={() => handlePayPenalty(lb.id)}>Pay</button>
+                    <button onClick={() => openConfirmationModal(lb.id)}>
+                      Pay
+                    </button>
                   )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+
+      {/* --- Confirmation Modal (using 'yga-brwd-' styles) --- */}
+      {isModalOpen && (
+        <div className="yga-brwd-modal-overlay" onClick={closeConfirmationModal}>
+          <div
+            className="yga-brwd-modal-content yga-brwd-modal-return" // Using 'return' style as a base
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3>Confirm Payment</h3>
+            <p>Are you sure you want to mark this penalty as paid?</p>
+            <div className="yga-brwd-modal-buttons">
+              <button
+                className="yga-brwd-modal-btn yga-brwd-cancel"
+                onClick={closeConfirmationModal}
+              >
+                Cancel
+              </button>
+              <button
+                className="yga-brwd-modal-btn yga-brwd-confirm"
+                onClick={handleConfirmPay}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

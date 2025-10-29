@@ -272,6 +272,27 @@
      /* width: 90px; */ /* Example: if other spans are 80px */
 }
 
+.insert-book-fields select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+
+
+.insert-book-fields option {
+  color: #333;
+  font-size: 15px;
+}
+
+
 
 /* ============================
    Responsiveness (Merged Media Query)

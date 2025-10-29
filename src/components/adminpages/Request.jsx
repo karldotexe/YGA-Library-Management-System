@@ -6,8 +6,14 @@ import "./Request.css";
 function Request() {
   const [requests, setRequests] = useState([]);
   const [search, setSearch] = useState("");
+
+  // State for Decline Modal
   const [declineModal, setDeclineModal] = useState(false);
-  const [selectedRequest, setSelectedRequest] = useState(null);
+  const [selectedDeclineRequest, setSelectedDeclineRequest] = useState(null);
+
+  // --- NEW: State for Accept Modal ---
+  const [acceptModal, setAcceptModal] = useState(false);
+  const [selectedAcceptRequest, setSelectedAcceptRequest] = useState(null);
 
   useEffect(() => {
     fetchRequests();
@@ -50,7 +56,8 @@ function Request() {
       console.error("Error fetching requests:", err.message);
     }
   };
-const handleApprove = async (requestId, bookId, studentId) => {
+
+  const handleApprove = async (requestId, bookId, studentId) => {
     try {
       // 1️⃣ Reduce the book copies by 1
       const { data: book, error: bookError } = await supabase
@@ -112,8 +119,6 @@ const handleApprove = async (requestId, bookId, studentId) => {
     }
   };
 
-
-
   const handleDecline = async (requestId) => {
     const { error } = await supabase
       .from("borrowed_books")
@@ -124,15 +129,34 @@ const handleApprove = async (requestId, bookId, studentId) => {
     else fetchRequests();
   };
 
+  // --- NEW: Accept Modal Functions ---
+  const openAcceptModal = (request) => {
+    setSelectedAcceptRequest(request);
+    setAcceptModal(true);
+  };
+
+  const confirmAccept = () => {
+    if (selectedAcceptRequest) {
+      handleApprove(
+        selectedAcceptRequest.id,
+        selectedAcceptRequest.book.book_id,
+        selectedAcceptRequest.student_id
+      );
+      setSelectedAcceptRequest(null);
+      setAcceptModal(false);
+    }
+  };
+
+  // --- Decline Modal Functions (Updated State) ---
   const openDeclineModal = (request) => {
-    setSelectedRequest(request);
+    setSelectedDeclineRequest(request);
     setDeclineModal(true);
   };
 
   const confirmDecline = () => {
-    if (selectedRequest) {
-      handleDecline(selectedRequest.id);
-      setSelectedRequest(null);
+    if (selectedDeclineRequest) {
+      handleDecline(selectedDeclineRequest.id);
+      setSelectedDeclineRequest(null);
       setDeclineModal(false);
     }
   };
@@ -191,14 +215,13 @@ const handleApprove = async (requestId, bookId, studentId) => {
             </div>
 
             <div className="requests-page__actions">
-
+              {/* --- UPDATED: Accept Button --- */}
               <button
                 className="requests-page__btn-accept"
-                onClick={() => handleApprove(req.id, req.book.book_id, req.student_id)}
+                onClick={() => openAcceptModal(req)} // Changed
               >
                 Accept
               </button>
-
 
               <button
                 className="requests-page__btn-decline"
@@ -211,16 +234,34 @@ const handleApprove = async (requestId, bookId, studentId) => {
         ))
       )}
 
-      {/* Decline Confirmation Modal */}
-      {declineModal && selectedRequest && (
+      {/* --- NEW: Accept Confirmation Modal --- */}
+      {acceptModal && selectedAcceptRequest && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Accept this request?</h3>
+            <p>
+              Are you sure you want to accept the request for{" "}
+              <strong>{selectedAcceptRequest.book?.title}</strong> by{" "}
+              {selectedAcceptRequest.borrowerName}?
+            </p>
+            <div className="modal-buttons">
+              <button onClick={() => setAcceptModal(false)}>Cancel</button>
+              <button onClick={confirmAccept}>Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- Decline Confirmation Modal (Updated State) --- */}
+      {declineModal && selectedDeclineRequest && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>Decline this request?</h3>
             <p>
               Are you sure you want to decline the request for{" "}
-              <strong>{selectedRequest.book?.title}</strong> by{" "}
-              {selectedRequest.borrowerName}?
-            </p>
+              <strong>{selectedDeclineRequest.book?.title}</strong> by{" "}
+              {selectedDeclineRequest.borrowerName}?
+              </p>
             <div className="modal-buttons">
               <button onClick={() => setDeclineModal(false)}>Cancel</button>
               <button onClick={confirmDecline}>Confirm</button>

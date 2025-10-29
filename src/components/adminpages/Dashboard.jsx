@@ -47,18 +47,11 @@ function StudentDetailsModal({ student, onClose }) {
 function BookDetailsModal({ book, onClose }) {
   if (!book) return null;
 
-  const defaultBookCover = "/default-book-cover.png";
 
   return (
     <div className="modal-overlay book-modal-overlay" onClick={onClose}>
       <div className="modal-content book-modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={onClose}>&times;</button>
-        <img
-          src={book.image || defaultBookCover}
-          alt={book.title || "Book Cover"}
-          className="modal-book-image"
-          onError={(e) => { e.target.onerror = null; e.target.src = defaultBookCover; }}
-        />
         <div className="modal-book-details">
           <h3>{book.title || "N/A"}</h3>
           <div className="details-grid">
@@ -144,13 +137,12 @@ export default function Dashboard() {
           supabase.from("books").select("book_id", { count: 'exact' }),
           supabase.from("borrowed_books").select("id, status, borrow_date, due_date, return_date, borrow_days, penalty_status, student_id, book_id, created_at"),
           supabase.from("archives").select("book_id", { count: 'exact' }),
-          // ✅ MODIFIED QUERY for recentStudentsRes
           supabase.from("students")
             .select("id, full_name, lrn, grade, section, created_at, image, contact, age, gender, email")
-            .not('full_name', 'is', null) // Filter out null full_name
-            .not('full_name', 'eq', '')   // Filter out empty string full_name
-            .not('email', 'is', null)     // Filter out null email
-            .not('email', 'eq', '')       // Filter out empty string email
+            .not('full_name', 'is', null)
+            .not('full_name', 'eq', '')
+            .not('email', 'is', null)
+            .not('email', 'eq', '')
             .order('created_at', { ascending: false })
             .limit(5)
         ]);
@@ -199,29 +191,29 @@ export default function Dashboard() {
           const borrowDate = b.borrow_date ? new Date(b.borrow_date) : null;
           const dueDateString = b.due_date?.replace(' ', 'T');
           const dueDate = dueDateString ? new Date(dueDateString) : null;
-           if(dueDate) dueDate.setHours(0,0,0,0);
+            if(dueDate) dueDate.setHours(0,0,0,0);
           const createdDate = b.created_at ? new Date(b.created_at) : null;
 
           if (b.status === "returned") returnedCount++;
           if (b.status === "pending") pendingRequests++;
           if (b.status === "lost") {
-             lostCount++;
-             if (b.penalty_status === 'unpaid' || b.penalty_status === 'pending') unpaidLostCount++;
-           }
-           if (b.status === "approved" && !b.return_date) {
-             currentlyBorrowedCount++;
-             if (dueDate && dueDate < todayStart) currentlyOverdueCount++;
-           }
-           if (borrowDate) {
-             const normalizedBorrowDate = new Date(borrowDate);
-             normalizedBorrowDate.setHours(0,0,0,0);
-             if (normalizedBorrowDate >= startOfWeek) borrowedThisWeekCount++;
-           }
-           const firstDayOfMonthLocal = new Date(now.getFullYear(), now.getMonth(), 1);
-           const lastDayOfMonthLocal = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-           if(createdDate && createdDate >= firstDayOfMonthLocal && createdDate <= lastDayOfMonthLocal) {
-             borrowsThisMonth.push(b);
-           }
+              lostCount++;
+              if (b.penalty_status === 'unpaid' || b.penalty_status === 'pending') unpaidLostCount++;
+            }
+            if (b.status === "approved" && !b.return_date) {
+              currentlyBorrowedCount++;
+              if (dueDate && dueDate < todayStart) currentlyOverdueCount++;
+            }
+            if (borrowDate) {
+              const normalizedBorrowDate = new Date(borrowDate);
+              normalizedBorrowDate.setHours(0,0,0,0);
+              if (normalizedBorrowDate >= startOfWeek) borrowedThisWeekCount++;
+            }
+            const firstDayOfMonthLocal = new Date(now.getFullYear(), now.getMonth(), 1);
+            const lastDayOfMonthLocal = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+            if(createdDate && createdDate >= firstDayOfMonthLocal && createdDate <= lastDayOfMonthLocal) {
+              borrowsThisMonth.push(b);
+            }
         });
         const avgSession = borrowed.length ? `${Math.round(totalBorrowDaysSum / borrowed.length)}d` : "0d";
 
@@ -236,9 +228,9 @@ export default function Dashboard() {
 
         if (sortedBorrowerIds.length > 0) {
           const { data: topStudentData, error: topStudentError } = await supabase
-           .from('students')
-           .select('auth_user_id, full_name, lrn, grade, section, image, contact, age, gender, email')
-           .in('auth_user_id', sortedBorrowerIds);
+            .from('students')
+            .select('auth_user_id, full_name, lrn, grade, section, image, contact, age, gender, email')
+            .in('auth_user_id', sortedBorrowerIds);
 
           if (topStudentError) throw topStudentError;
 
@@ -256,10 +248,15 @@ export default function Dashboard() {
             return m;
           }, {});
 
-          topBorrowersList = sortedBorrowerIds.map(id => ({
-            student: studentMap[id] || { auth_user_id: id, full_name: 'Unknown' },
-            count: borrowerCounts[id]
-          }));
+          // --- MODIFICATION: Filter out non-existent students ---
+          topBorrowersList = sortedBorrowerIds.map(id => {
+            const student = studentMap[id];
+            if (!student) return null; // Skip if student not found
+            return {
+              student: student,
+              count: borrowerCounts[id]
+            };
+          }).filter(Boolean); // Removes all null entries
         }
 
         // Calculate Top Books
@@ -270,9 +267,9 @@ export default function Dashboard() {
         if (sortedBookIds.length > 0) {
           const numIds = sortedBookIds.map(id => parseInt(id, 10));
           const { data: topBookData, error: topBookError } = await supabase
-           .from('books')
-           .select('book_id, title, author, genre, year, copies, price, image')
-           .in('book_id', numIds);
+            .from('books')
+            .select('book_id, title, author, genre, year, copies, price, image')
+            .in('book_id', numIds);
 
           if (topBookError) throw topBookError;
 
@@ -290,10 +287,15 @@ export default function Dashboard() {
             return m;
           }, {});
 
-          topBooksList = sortedBookIds.map(id => ({
-            book: bookMap[parseInt(id, 10)] || { book_id: id, title: 'Unknown' },
-            count: bookCounts[id]
-          }));
+          // --- MODIFICATION: Filter out non-existent books ---
+          topBooksList = sortedBookIds.map(id => {
+            const book = bookMap[parseInt(id, 10)];
+            if (!book) return null; // Skip if book not found
+            return {
+              book: book,
+              count: bookCounts[id]
+            };
+          }).filter(Boolean); // Removes all null entries
         }
 
         // Update state
@@ -319,12 +321,12 @@ export default function Dashboard() {
         console.error("Error fetching dashboard data:", err);
         setError(`Failed to load dashboard data: ${err.message || err}`);
       } finally {
-         setLoading(false);
+          setLoading(false);
       }
   };
 
-   if (loading) { return <div className="dashboard-loading">Loading Dashboard Data...</div>; }
-   if (error) { return <div className="dashboard-error">⚠️ Error: {error}</div>; }
+    if (loading) { return <div className="dashboard-loading">Loading Dashboard Data...</div>; }
+    if (error) { return <div className="dashboard-error">⚠️ Error: {error}</div>; }
 
   const defaultAvatar = "/default-avatar.png";
 
@@ -370,10 +372,10 @@ export default function Dashboard() {
                 >
                  <div className="student-info">
                    <img
-                     src={student.image || defaultAvatar}
-                     alt={student.full_name || 'Avatar'}
-                     className="student-avatar-img"
-                     onError={(e) => { e.target.onerror = null; e.target.src = defaultAvatar; }}
+                      src={student.image || defaultAvatar}
+                      alt={student.full_name || 'Avatar'}
+                      className="student-avatar-img"
+                      onError={(e) => { e.target.onerror = null; e.target.src = defaultAvatar; }}
                    />
                    <div>
                      <span className="student-name">{student.full_name || 'N/A'}</span>
@@ -386,7 +388,7 @@ export default function Dashboard() {
                 </li>
               ))
             ) : (
-              <p className="no-data">No recent valid registrations.</p> // Updated message slightly
+              <p className="no-data">No recent valid registrations.</p>
             )}
           </ul>
         </div>
@@ -414,7 +416,10 @@ export default function Dashboard() {
                 </li>
               ))}
             </ol>
-          ) : ( <p className="no-data">No books borrowed yet.</p> )}
+          ) : ( 
+            // --- MODIFICATION: Updated empty state message ---
+            <p className="no-data">No valid top books this month.</p>
+          )}
         </div>
 
         {/* --- Top Borrowers Card --- */}
@@ -440,7 +445,10 @@ export default function Dashboard() {
                 </li>
               ))}
             </ol>
-          ) : ( <p className="no-data">No borrowing activity yet.</p> )}
+          ) : ( 
+            // --- MODIFICATION: Updated empty state message ---
+            <p className="no-data">No valid top borrowers this month.</p>
+          )}
         </div>
 
       </div> {/* End Grid */}
@@ -466,8 +474,8 @@ export default function Dashboard() {
               key={book.book_id || index}
               className="list-item clickable"
               onClick={() => {
-                setSelectedBook(book); // Click item to see detail
-                setShowTopBooksModal(false); // Close list modal
+                setSelectedBook(book);
+                setShowTopBooksModal(false);
               }}
             >
               <span className="rank">{index + 1}.</span>
@@ -488,8 +496,8 @@ export default function Dashboard() {
               key={student.auth_user_id || index}
               className="list-item clickable"
               onClick={() => {
-                setSelectedStudent(student); // Click item to see detail
-                setShowTopBorrowersModal(false); // Close list modal
+                setSelectedStudent(student);
+                setShowTopBorrowersModal(false);
               }}
             >
               <span className="rank">{index + 1}.</span>

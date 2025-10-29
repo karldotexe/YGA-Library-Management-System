@@ -1,8 +1,29 @@
-import React, { useState, useEffect } from "react"; // --- Added useEffect ---
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase-client.js";
 import "./InsertBooks.css";
 import { FaArrowLeft } from "react-icons/fa";
+
+// --- List of common genres ---
+const commonGenres = [
+  "Fiction",
+  "Non-Fiction",
+  "Science Fiction",
+  "Fantasy",
+  "Mystery",
+  "Thriller",
+  "Romance",
+  "Biography",
+  "History",
+  "Self-Help",
+  "Poetry",
+  "Academic",
+  "Children's",
+  "Young Adult",
+  "Horror",
+  "Graphic Novel",
+  "Cookbook",
+];
 
 function InsertBooks() {
   const navigate = useNavigate();
@@ -20,40 +41,38 @@ function InsertBooks() {
   const [imageFile, setImageFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
-  // --- ADDED STATE for success message ---
-  const [successMessage, setSuccessMessage] = useState("");
-  // --- ADDED STATE for error message (optional but good practice) ---
+  
+  // State for the modal
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // --- useEffect to clear messages after a delay ---
   useEffect(() => {
-    let successTimer;
+    // Timeout for the error message
     let errorTimer;
-    if (successMessage) {
-      successTimer = setTimeout(() => {
-        setSuccessMessage("");
-      }, 5000); // Clear after 5 seconds
-    }
     if (errorMessage) {
-       errorTimer = setTimeout(() => {
-         setErrorMessage("");
-       }, 5000); // Clear after 5 seconds
+      errorTimer = setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
     }
-    // Cleanup function to clear timeouts if component unmounts
     return () => {
-      clearTimeout(successTimer);
       clearTimeout(errorTimer);
     };
-  }, [successMessage, errorMessage]); // Rerun effect when messages change
+  }, [errorMessage]);
+
+
+    useEffect(() => {
+      if (isSuccessModalOpen) {
+        const timer = setTimeout(() => {
+          navigate("/admin/books");
+        }, 2000); // redirect after 2 seconds
+        return () => clearTimeout(timer);
+      }
+    }, [isSuccessModalOpen, navigate]);
 
   const handleChange = (e) => {
-     // --- Clear messages on input change ---
-     setSuccessMessage("");
-     setErrorMessage("");
-
+    setErrorMessage("");
     const { name, value } = e.target;
 
-    // ISBN — only numbers, max 13 digits
     if (name === "isbn") {
       if (/^\d{0,13}$/.test(value)) {
         setBook((prev) => ({ ...prev, [name]: value }));
@@ -61,7 +80,6 @@ function InsertBooks() {
       return;
     }
 
-    // Title — allow letters, numbers, spaces, common punctuation
     if (name === "title") {
       if (/^[A-Za-z0-9\s:'\-?]*$/.test(value)) {
         setBook((prev) => ({ ...prev, [name]: value }));
@@ -69,7 +87,6 @@ function InsertBooks() {
       return;
     }
 
-    // Author — only letters, spaces, periods
     if (name === "author") {
       if (/^[A-Za-z\s.]*$/.test(value)) {
         setBook((prev) => ({ ...prev, [name]: value }));
@@ -77,23 +94,23 @@ function InsertBooks() {
       return;
     }
 
-    // Genre — allow letters, spaces, commas
-      if (name === "genre") {
-        if (/^[A-Za-z\s,]*$/.test(value)) {
-          setBook((prev) => ({ ...prev, [name]: value }));
-        }
-        return;
-      }
-
-    // Description Validation
-    if (name === "description") {
-      if (/^[A-Za-z0-9\s.,:'\-?!;()]*$/.test(value)) {
+    if (name === "genre") {
+      if (/^[A-Za-z\s,]*$/.test(value)) {
         setBook((prev) => ({ ...prev, [name]: value }));
       }
       return;
     }
 
-    // Year — only numbers, 4 digits max
+    if (name === "description") {
+      if (
+        /^[A-Za-z0-9\s.,:'\-?!;()]*$/.test(value) &&
+        value.length <= 400
+      ) {
+        setBook((prev) => ({ ...prev, [name]: value }));
+      }
+      return;
+    }
+
     if (name === "year") {
       if (/^\d{0,4}$/.test(value)) {
         setBook((prev) => ({ ...prev, [name]: value }));
@@ -101,31 +118,30 @@ function InsertBooks() {
       return;
     }
 
-    // Price — up to billions (max 9 digits before decimal)
     if (name === "price") {
-       if (/^(\d{0,9}(\.\d{0,2})?|\.\d{0,2})$/.test(value)) {
+      if (/^(\d{0,9}(\.\d{0,2})?|\.\d{0,2})$/.test(value)) {
         setBook((prev) => ({ ...prev, [name]: value }));
       }
       return;
     }
 
-    // Copies — only numbers (non-negative integer)
     if (name === "copies") {
-      if (/^\d*$/.test(value)) {
-        setBook((prev) => ({ ...prev, [name]: value }));
+      if (value === "") {
+        setBook((prev) => ({ ...prev, [name]: "" }));
+        return;
+      }
+      if (/^\d+$/.test(value)) {
+        const num = parseInt(value, 10);
+        if (num <= 10000) {
+          setBook((prev) => ({ ...prev, [name]: value }));
+        }
       }
       return;
     }
-
-    // Default update
-    setBook({ ...book, [name]: value });
   };
 
   const handleImageChange = (e) => {
-     // --- Clear messages on image change ---
-     setSuccessMessage("");
-     setErrorMessage("");
-
+    setErrorMessage("");
     const file = e.target.files[0];
     if (file) {
       setImageFile(file);
@@ -135,57 +151,69 @@ function InsertBooks() {
       };
       reader.readAsDataURL(file);
     } else {
-        setImageFile(null);
-        setPreviewUrl(null);
+      setImageFile(null);
+      setPreviewUrl(null);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // --- Clear previous messages on submit ---
-    setSuccessMessage("");
     setErrorMessage("");
 
-    // Basic field validations before submitting
+    // --- Validations ---
     if (book.isbn.length !== 13) {
       setErrorMessage("ISBN must be exactly 13 digits.");
       return;
     }
+
+    // --- MODIFIED: Year Validation ---
     const currentYear = new Date().getFullYear();
-    if (book.year.length !== 4 || parseInt(book.year, 10) > currentYear || parseInt(book.year, 10) < 1000 ) {
-      setErrorMessage("Year must be a valid 4-digit year.");
+    if (
+      book.year.length !== 4 ||
+      parseInt(book.year, 10) > currentYear ||
+      parseInt(book.year, 10) < 1800 // Changed from 1000
+    ) {
+      // Updated error message
+      setErrorMessage(
+        `Year must be valid`
+      );
       return;
     }
+    // --- End of Modified Validation ---
+
     if (!book.title.trim()) {
-        setErrorMessage("Title cannot be empty.");
-        return;
+      setErrorMessage("Title cannot be empty.");
+      return;
     }
-      if (!book.author.trim()) {
-        setErrorMessage("Author cannot be empty.");
-        return;
+    if (!book.author.trim()) {
+      setErrorMessage("Author cannot be empty.");
+      return;
     }
-      if (!book.genre.trim()) {
-        setErrorMessage("Genre cannot be empty.");
-        return;
+    if (!book.genre.trim()) {
+      setErrorMessage("Genre cannot be empty.");
+      return;
     }
     if (!book.description.trim()) {
-        setErrorMessage("Description cannot be empty.");
-        return;
+      setErrorMessage("Description cannot be empty.");
+      return;
     }
-      if (book.copies === '' || parseInt(book.copies, 10) < 0) {
-        setErrorMessage("Copies must be a non-negative number.");
-        return;
+    if (
+      book.copies === "" ||
+      parseInt(book.copies, 10) < 1 ||
+      parseInt(book.copies, 10) > 10000
+    ) {
+      setErrorMessage("Copies must be between 1 and 10,000.");
+      return;
     }
-      if (book.price === '' || parseFloat(book.price) < 0) {
-        setErrorMessage("Price must be a non-negative number.");
-        return;
+    if (book.price === "" || parseFloat(book.price) < 0) {
+      setErrorMessage("Price must be a non-negative number.");
+      return;
     }
-
+    // --- End Validations ---
 
     try {
       setUploading(true);
 
-      // Step 1: Check if ISBN already exists
       const { data: existingBook, error: fetchError } = await supabase
         .from("books")
         .select("isbn")
@@ -200,10 +228,9 @@ function InsertBooks() {
         return;
       }
 
-      // Step 2: Upload image if exists
       let imageUrl = null;
       if (imageFile) {
-        const fileExt = imageFile.name.split('.').pop();
+        const fileExt = imageFile.name.split(".").pop();
         const fileName = `${book.isbn}-${Date.now()}.${fileExt}`;
         const { error: uploadError } = await supabase.storage
           .from("book-images")
@@ -216,12 +243,11 @@ function InsertBooks() {
           .getPublicUrl(fileName);
 
         if (!publicUrlData || !publicUrlData.publicUrl) {
-            console.warn("Could not get public URL for uploaded image.");
+          console.warn("Could not get public URL for uploaded image.");
         }
         imageUrl = publicUrlData.publicUrl;
       }
 
-      // Step 3: Insert new book record
       const { error: insertError } = await supabase.from("books").insert([
         {
           isbn: book.isbn,
@@ -238,27 +264,37 @@ function InsertBooks() {
 
       if (insertError) throw insertError;
 
-      // --- MODIFIED: Set success message instead of alert ---
-      setSuccessMessage("Book added successfully!");
+      // --- Open success modal ---
+      setIsSuccessModalOpen(true);
 
       // Reset form
       setBook({
-        isbn: "", title: "", author: "", genre: "", description: "", year: "", copies: "", price: ""
+        isbn: "",
+        title: "",
+        author: "",
+        genre: "",
+        description: "",
+        year: "",
+        copies: "",
+        price: "",
       });
       setImageFile(null);
       setPreviewUrl(null);
-      // Clear the file input visually (optional but recommended)
       const fileInput = document.getElementById("book-image-input");
-      if(fileInput) fileInput.value = "";
-
-
+      if (fileInput) fileInput.value = "";
     } catch (error) {
       console.error("Error adding book:", error);
-      // --- MODIFIED: Set error message instead of alert ---
-      setErrorMessage("❌ Failed to add book: " + (error.message || "Unknown error"));
+      setErrorMessage(
+        "❌ Failed to add book: " + (error.message || "Unknown error")
+      );
     } finally {
       setUploading(false);
     }
+  };
+
+  // --- Function to close the success modal ---
+  const closeSuccessModal = () => {
+    setIsSuccessModalOpen(false);
   };
 
   return (
@@ -274,7 +310,7 @@ function InsertBooks() {
           onClick={() => document.getElementById("book-image-input")?.click()}
         >
           {previewUrl ? (
-              <img
+            <img
               src={previewUrl}
               alt="Preview"
               className="insert-book-preview"
@@ -287,26 +323,15 @@ function InsertBooks() {
             id="book-image-input"
             accept="image/*"
             onChange={handleImageChange}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
         </div>
 
         {/* Book Fields Area */}
         <div className="insert-book-fields">
-
-           {/* --- ADDED: Success Message Display --- */}
-           {successMessage && (
-             <div className="insert-book-success-message">
-               {successMessage}
-             </div>
-           )}
-
-            {/* --- ADDED: Error Message Display --- */}
-           {errorMessage && (
-             <div className="insert-book-error-message">
-               {errorMessage}
-             </div>
-           )}
+          {errorMessage && (
+            <div className="insert-book-error-message">{errorMessage}</div>
+          )}
 
           <label>
             <span>ISBN:</span>
@@ -326,6 +351,7 @@ function InsertBooks() {
               type="text"
               name="title"
               value={book.title}
+              maxLength="400"
               onChange={handleChange}
               required
             />
@@ -344,25 +370,32 @@ function InsertBooks() {
 
           <label>
             <span>Genre:</span>
-           <input
-              type="text"
+            <select
               name="genre"
               value={book.genre}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Select a genre</option>
+              {commonGenres.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
+              ))}
+            </select>
           </label>
 
           <label className="insert-book-description">
-              <span>Description:</span>
-              <textarea
-                name="description"
-                value={book.description}
-                onChange={handleChange}
-                rows="4"
-                placeholder="A brief summary of the book..."
-                required
-              />
+            <span>Description:</span>
+            <textarea
+              name="description"
+              value={book.description}
+              onChange={handleChange}
+              rows="4"
+              placeholder="A brief summary of the book..."
+              maxLength="400"
+              required
+            />
           </label>
 
           <label>
@@ -385,7 +418,8 @@ function InsertBooks() {
               name="copies"
               value={book.copies}
               onChange={handleChange}
-              min="0"
+              min="1"
+              max="10000"
               required
             />
           </label>
@@ -397,7 +431,6 @@ function InsertBooks() {
               name="price"
               value={book.price}
               onChange={handleChange}
-              placeholder="e.g., 299.99"
               inputMode="decimal"
               required
             />
@@ -408,6 +441,23 @@ function InsertBooks() {
           </button>
         </div>
       </form>
+
+            
+        {isSuccessModalOpen && (
+          <div
+            className="yga-brwd-modal-overlay"
+            onClick={closeSuccessModal}
+          >
+            <div
+              className="yga-brwd-modal-content yga-brwd-modal-return"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3>Success</h3>
+              <p>Book added successfully!</p>
+            </div>
+          </div>
+        )}
+
     </div>
   );
 }

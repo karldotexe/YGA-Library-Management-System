@@ -219,7 +219,7 @@
 
 /* Archive Button (Red) */
 .edit-book-archive-btn {
-  background-color: #f8d7da; /* Light red */
+  background-color: #ff6b6b; /* Light red */
   color: #000000; /* Dark red text */
 }
 .edit-book-archive-btn:hover {
@@ -261,6 +261,30 @@
 .edit-book-fields label.edit-book-description span {
   padding-top: 10px;
 }
+
+
+.edit-book-fields select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  color: #333;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+
+
+.edit-book-fields option {
+  color: #333;
+  font-size: 15px;
+}
+
+
+
 
 /* ============================
     Responsiveness
